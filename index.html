@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Mousewheel Zooming Images</title>
+
+<link rel="stylesheet" type="text/css" href="styles.css" />
+
+<script>
+var zoom = function(e){
+	var speed = 15, minWidth = 50;
+	var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+	this.style.width = Math.max(minWidth, Math.min(this.maxWidth, this.width + (speed * delta))) + "px";
+}
+
+
+
+
+window.addEventListener("load",function(){
+	var nodes = document.querySelectorAll("img.zoom");
+	for(var i=0; i<nodes.length; i++){
+		nodes[i].maxWidth = nodes[i].width;
+		nodes[i].addEventListener("mousewheel",zoom);
+		nodes[i].addEventListener("DOMMouseScroll", zoom);
+	}
+});
+</script>
+
+</head>
+
+<body>
+
+	<img src="img.jpg" alt="image" class="zoom" />
+	<img src="img.jpg" alt="image" class="zoom" />
+
+</body>
+</html>
